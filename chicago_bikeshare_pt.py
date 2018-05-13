@@ -28,6 +28,8 @@ input("Aperte Enter para continuar...")
 # TAREFA 1
 # TODO: Imprima as primeiras 20 linhas usando um loop para identificar os dados.
 print("\n\nTAREFA 1: Imprimindo as primeiras 20 amostras")
+for index in range(1,21):
+      print("Linha {} :\n{}".format(index,data_list[index]))
 
 # Vamos mudar o data_list para remover o cabeçalho dele.
 data_list = data_list[1:]
@@ -37,9 +39,11 @@ data_list = data_list[1:]
 
 input("Aperte Enter para continuar...")
 # TAREFA 2
-# TODO: Imprima o `gênero` das primeiras 20 linhas
-
 print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
+
+# TODO: Imprima o `gênero` das primeiras 20 linhas
+for index in range(0,20):
+      print("Linha {} :\nGênero - {}".format(index,data_list[index][-2]))
 
 
 # Ótimo! Nós podemos pegar as linhas(samples) iterando com um for, e as colunas(features) por índices.
@@ -51,6 +55,9 @@ input("Aperte Enter para continuar...")
 def column_to_list(data, index):
     column_list = []
     # Dica: Você pode usar um for para iterar sobre as amostras, pegar a feature pelo seu índice, e dar append para uma lista
+    for line in data:
+        column_list.append(line[index])
+
     return column_list
 
 
@@ -68,9 +75,8 @@ input("Aperte Enter para continuar...")
 # Agora sabemos como acessar as features, vamos contar quantos Male (Masculinos) e Female (Femininos) o dataset tem
 # TAREFA 4
 # TODO: Conte cada gênero. Você não deveria usar uma função parTODO isso.
-male = 0
-female = 0
-
+male    = column_to_list(data_list, -2).count("Male")
+female  = column_to_list(data_list, -2).count("Female")
 
 # Verificando o resultado
 print("\nTAREFA 4: Imprimindo quantos masculinos e femininos nós encontramos")
@@ -85,10 +91,16 @@ input("Aperte Enter para continuar...")
 # TAREFA 5
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
+
+def feature_count(features):
+    features_counted = {}
+    for key, value in features.items():
+        features_counted[key] = column_to_list(data_list,value).count(key)
+    return features_counted
+
 def count_gender(data_list):
-    male = 0
-    female = 0
-    return [male, female]
+    genders = feature_count({"Male" : -2,"Female": -2})
+    return [genders["Male"], genders["Female"]]
 
 
 print("\nTAREFA 5: Imprimindo o resultado de count_gender")
@@ -106,7 +118,15 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Masculino", "Feminino", ou "Igual" como resposta.
 def most_popular_gender(data_list):
-    answer = ""
+    answer      = ""
+    gender_qtd  = count_gender(data_list)
+    if(gender_qtd[0] > gender_qtd[1]):
+        answer = "Masculino"
+    elif (gender_qtd[0] < gender_qtd[1]):
+        answer = "Feminino" 
+    else:
+        answer="Igual"
+
     return answer
 
 
@@ -134,7 +154,16 @@ input("Aperte Enter para continuar...")
 # TAREFA 7
 # TODO: Crie um gráfico similar para user_types. Tenha certeza que a legenda está correta.
 print("\nTAREFA 7: Verifique o gráfico!")
-
+types       = ["Customer", "Subscriber"]
+user_types  = feature_count({"Customer" : -3,"Subscriber": -3})
+quantity    = [user_types["Customer"],user_types["Subscriber"]]
+y_pos       = list(range(len(types)))
+plt.bar(y_pos, quantity)
+plt.ylabel('Quantidade')
+plt.xlabel('User Types')
+plt.xticks(y_pos, types)
+plt.title('Quantidade por User Types')
+plt.show(block=True)
 
 input("Aperte Enter para continuar...")
 # TAREFA 8
@@ -189,15 +218,15 @@ input("Aperte Enter para continuar...")
 # TAREFA 11
 # Volte e tenha certeza que você documenteou suas funções. Explique os parâmetros de entrada, a saída, e o que a função faz. Exemplo:
 # def new_function(param1: int, param2: str) -> list:
-      """
-      Função de exemplo com anotações.
-      Argumentos:
-          param1: O primeiro parâmetro.
-          param2: O segundo parâmetro.
-      Retorna:
-          Uma lista de valores x.
-
-      """
+#      """
+#      Função de exemplo com anotações.
+#      Argumentos:
+#          param1: O primeiro parâmetro.
+#          param2: O segundo parâmetro.
+#      Retorna:
+#          Uma lista de valores x.
+#
+#      """
 
 input("Aperte Enter para continuar...")
 # TAREFA 12 - Desafio! (Opcional)
