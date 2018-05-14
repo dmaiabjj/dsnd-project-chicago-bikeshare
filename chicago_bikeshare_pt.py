@@ -237,7 +237,8 @@ def quick_sort(unordered_list):
     #          unordered_list: É uma lista na qual desejamos ordenar
     #      Retorna:
     #          Retorna uma lista com os valores ordenados
-    #
+    #      Algoritmo baseado no exemplo da página:
+    #      https://stackoverflow.com/questions/18262306/quicksort-with-python
     #      """
     #Recurso para parar a recursão quando os agrupamentos não tiverem mais elementos
     if not unordered_list:
