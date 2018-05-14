@@ -336,8 +336,7 @@ print("Você vai encarar o desafio? (yes ou no)")
 answer = "yes"
 
 def count_items(column_list):
-    item_types = []
-    count_items = []
+    item_types,count_items      = zip(*[(feature,column_list.count(feature)) for feature in iter(set(column_list))])
     return item_types, count_items
 
 
