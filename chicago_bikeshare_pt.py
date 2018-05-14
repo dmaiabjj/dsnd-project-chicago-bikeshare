@@ -101,14 +101,33 @@ input("Aperte Enter para continuar...")
 
 
 # TODO : COLOCAR COMENTÁRIO
-def feature_count(features):
+def feature_count(features,data_list):
+    #      """
+    #      Função que compara 2 elementos de uma linha do data list
+    #      Argumentos:
+    #          features:  É um dictionary que possue como Key o valor a ser comparado e o Value é o index da coluna na qual iremos ter esse valor
+    #          data_list: É uma lista contendo todos os dados da amostra
+    #      Retorna:
+    #          Retorna um dictionary que possue como Key o valor comparado e como Value o total desses valores que apareceram na coluna
+    #          Ex : {"Male": 2,"Female": 2}
+    #      """
     features_counted = {}
     for key, value in features.items():
         features_counted[key] = column_to_list(data_list,value).count(key)
     return features_counted
 
+
 def count_gender(data_list):
-    genders = feature_count({"Male" : -2,"Female": -2})
+    #      """
+    #      Função que conta quantas x cada um dos gêneros apareceram no data list
+    #      Argumentos:
+    #          data_list: É uma lista contendo todos os dados da amostra
+    #      Retorna:
+    #          Retorna uma lista onde no indice 0 estão os valores do gênero Masculino e no indice 1 os valores do gênero feminino
+    #          Ex : [25,50]
+    #
+    #      """
+    genders = feature_count({"Male" : -2,"Female": -2},data_list)
     return [genders["Male"], genders["Female"]]
 
 
@@ -127,6 +146,15 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função que pegue o gênero mais popular, e retorne este gênero como uma string.
 # Esperamos ver "Masculino", "Feminino", ou "Igual" como resposta.
 def most_popular_gender(data_list):
+    #      """
+    #      Função que verifica qual o gênero mais popular dentro da amostra
+    #      Argumentos:
+    #          data_list: É uma lista contendo todos os dados da amostra
+    #      Retorna:
+    #          Retorna uma string com o gênero mais popular ou indicando se os valores são iguais
+    #          Ex : Masculino para o gênero Male, Feminino para o gênero Female e Igual em caso de empate
+    #
+    #      """
     answer      = ""
     gender_qtd  = count_gender(data_list)
     if(gender_qtd[0] > gender_qtd[1]):
@@ -164,7 +192,7 @@ input("Aperte Enter para continuar...")
 # TODO: Crie um gráfico similar para user_types. Tenha certeza que a legenda está correta.
 print("\nTAREFA 7: Verifique o gráfico!")
 types       = ["Customer", "Subscriber"]
-user_types  = feature_count({"Customer" : -3,"Subscriber": -3})
+user_types  = feature_count({"Customer" : -3,"Subscriber": -3},data_list)
 quantity    = [user_types["Customer"],user_types["Subscriber"]]
 y_pos       = list(range(len(types)))
 plt.bar(y_pos, quantity)
@@ -199,11 +227,18 @@ max_trip    = 0
 mean_trip   = 0
 median_trip = 0
 
-# TODO : COLOCAR COMENTÁRIO
+
 round_int   = lambda x:int(round(x))
 
-# TODO : COLOCAR COMENTÁRIO
 def quick_sort(unordered_list):
+    #      """
+    #      Função que executa a ordenação de uma lista pelo método quicksort
+    #      Argumentos:
+    #          unordered_list: É uma lista na qual desejamos ordenar
+    #      Retorna:
+    #          Retorna uma lista com os valores ordenados
+    #
+    #      """
     #Recurso para parar a recursão quando os agrupamentos não tiverem mais elementos
     if not unordered_list:
         return []
@@ -215,16 +250,30 @@ def quick_sort(unordered_list):
     greater = quick_sort([x for x in unordered_list if x > unordered_list[0]])
     #Concatenamos as 3 listas. Pivô é o central com os menores elementos a esquerda e os maiores elementos a direita
     return less + pivots + greater
-
-# TODO : COLOCAR COMENTÁRIO        
+     
 def calc_mean(alist):
+    #      """
+    #      Função que calcula a média dos valores de uma lista
+    #      Argumentos:
+    #          alist: É uma lista na qual desejamos calcular a média de seus valores
+    #      Retorna:
+    #          Retorna a média no formato inteiro
+    #
+    #      """
     total = 0
     for num in alist:
         total += num
     return round_int(total/len(alist))
 
-# TODO : COLOCAR COMENTÁRIO  
 def median(alist):
+    #      """
+    #      Função que calcula a mediana dos valores de uma lista
+    #      Argumentos:
+    #          alist: É uma lista na qual desejamos calcular a mediana 
+    #      Retorna:
+    #          Retorna a mediana no formato inteiro
+    #
+    #      """
     size = len(alist)
     if (size % 2 == 0):
         return (alist[(size)//2] + alist[(size)//2-1]) / 2
@@ -253,7 +302,9 @@ input("Aperte Enter para continuar...")
 # TAREFA 10
 # Gênero é fácil porque nós temos apenas algumas opções. E quanto a start_stations? Quantas opções ele tem?
 # TODO: Verifique quantos tipos de start_stations nós temos, usando set()
-user_types = set()
+user_types = set(column_to_list(data_list,3))
+
+
 
 print("\nTAREFA 10: Imprimindo as start stations:")
 print(len(user_types))
@@ -282,7 +333,7 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar tipos de usuários, sem definir os tipos
 # para que nós possamos usar essa função com outra categoria de dados.
 print("Você vai encarar o desafio? (yes ou no)")
-answer = "no"
+answer = "yes"
 
 def count_items(column_list):
     item_types = []
