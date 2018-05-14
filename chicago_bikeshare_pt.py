@@ -228,7 +228,7 @@ mean_trip   = 0
 median_trip = 0
 
 
-round_int   = lambda x:int(round(x))
+round_int   = lambda value:int(round(value))
 
 def quick_sort(unordered_list):
     #      """
@@ -243,11 +243,11 @@ def quick_sort(unordered_list):
     if not unordered_list:
         return []
     #Escolhemos o primeiro item da lista como nosso Pivô
-    pivots = [x for x in unordered_list if x == unordered_list[0]]
+    pivots = [item for item in unordered_list if item == unordered_list[0]]
     #Agrupamos os elementos menores que o nosso elemento Pivô
-    less    = quick_sort([x for x in unordered_list if x < unordered_list[0]])
+    less    = quick_sort([item for item in unordered_list if item < unordered_list[0]])
     #Agrupamos os elementos maiores que o nosso elemento Pivô
-    greater = quick_sort([x for x in unordered_list if x > unordered_list[0]])
+    greater = quick_sort([item for item in unordered_list if item > unordered_list[0]])
     #Concatenamos as 3 listas. Pivô é o central com os menores elementos a esquerda e os maiores elementos a direita
     return less + pivots + greater
      
@@ -336,7 +336,7 @@ print("Você vai encarar o desafio? (yes ou no)")
 answer = "yes"
 
 def count_items(column_list):
-    item_types,count_items      = zip(*[(feature,column_list.count(feature)) for feature in iter(set(column_list))])
+    item_types,count_items      = zip(*[(column,column_list.count(column)) for column in iter(set(column_list))])
     return item_types, count_items
 
 
