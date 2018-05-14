@@ -75,8 +75,15 @@ input("Aperte Enter para continuar...")
 # Agora sabemos como acessar as features, vamos contar quantos Male (Masculinos) e Female (Femininos) o dataset tem
 # TAREFA 4
 # TODO: Conte cada gênero. Você não deveria usar uma função parTODO isso.
-male    = column_to_list(data_list, -2).count("Male")
-female  = column_to_list(data_list, -2).count("Female")
+male    = 0
+female  = 0
+genders = column_to_list(data_list, -2)
+
+for gender in genders:
+    if(gender == "Male"):
+        male +=1
+    elif(gender == "Female"):
+        female +=1
 
 # Verificando o resultado
 print("\nTAREFA 4: Imprimindo quantos masculinos e femininos nós encontramos")
@@ -92,6 +99,8 @@ input("Aperte Enter para continuar...")
 # TODO: Crie uma função para contar os gêneros. Retorne uma lista.
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 
+
+# TODO : COLOCAR COMENTÁRIO
 def feature_count(features):
     features_counted = {}
     for key, value in features.items():
@@ -171,7 +180,7 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = """Devido aos usuários do tipo Customer não possuírem o registro gênero informado, apenas o de tipo Subscriber. Provavelmente para usuários que fazem a subscription do serviço,
+answer = """Devido aos usuários do tipo Customer não possuírem o registro de gênero informado, apenas o de tipo Subscriber. Provavelmente para usuários que fazem a subscription do serviço,
 informar o gênero se faz obrigatório no cadastro e para clientes esporádicos não."""
 print("resposta:", answer)
 
@@ -185,11 +194,50 @@ input("Aperte Enter para continuar...")
 # TODO: Ache a duração de viagem Mínima, Máxima, Média, e Mediana.
 # Você não deve usar funções prontas parTODO isso, como max() e min().
 trip_duration_list = column_to_list(data_list, 2)
-min_trip = 0.
-max_trip = 0.
-mean_trip = 0.
-median_trip = 0.
+min_trip    = 0
+max_trip    = 0
+mean_trip   = 0
+median_trip = 0
 
+# TODO : COLOCAR COMENTÁRIO
+round_int   = lambda x:int(round(x))
+
+# TODO : COLOCAR COMENTÁRIO
+def quick_sort(unordered_list):
+    #Recurso para parar a recursão quando os agrupamentos não tiverem mais elementos
+    if not unordered_list:
+        return []
+    #Escolhemos o primeiro item da lista como nosso Pivô
+    pivots = [x for x in unordered_list if x == unordered_list[0]]
+    #Agrupamos os elementos menores que o nosso elemento Pivô
+    less    = quick_sort([x for x in unordered_list if x < unordered_list[0]])
+    #Agrupamos os elementos maiores que o nosso elemento Pivô
+    greater = quick_sort([x for x in unordered_list if x > unordered_list[0]])
+    #Concatenamos as 3 listas. Pivô é o central com os menores elementos a esquerda e os maiores elementos a direita
+    return less + pivots + greater
+
+# TODO : COLOCAR COMENTÁRIO        
+def calc_mean(alist):
+    total = 0
+    for num in alist:
+        total += num
+    return round_int(total/len(alist))
+
+# TODO : COLOCAR COMENTÁRIO  
+def median(alist):
+    size = len(alist)
+    if (size % 2 == 0):
+        return (alist[(size)//2] + alist[(size)//2-1]) / 2
+    else:
+        return alist[(size-1)//2]
+
+trip_duration_list = list(map(int,trip_duration_list))
+trip_duration_list = quick_sort(trip_duration_list)
+
+min_trip    = trip_duration_list[0]
+max_trip    = trip_duration_list[-1]
+mean_trip   = calc_mean(trip_duration_list)
+median_trip = median(trip_duration_list)
 
 print("\nTAREFA 9: Imprimindo o mínimo, máximo, média, e mediana")
 print("Min: ", min_trip, "Max: ", max_trip, "Média: ", mean_trip, "Mediana: ", median_trip)
