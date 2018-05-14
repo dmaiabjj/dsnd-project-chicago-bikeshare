@@ -43,7 +43,7 @@ print("\nTAREFA 2: Imprimindo o gênero das primeiras 20 amostras")
 
 # TODO: Imprima o `gênero` das primeiras 20 linhas
 for index in range(0,20):
-      print("Linha {} :\nGênero - {}".format(index,data_list[index][-2]))
+      print("Linha {} :\nGênero - {}".format(index+1,data_list[index][-2]))
 
 
 # Ótimo! Nós podemos pegar as linhas(samples) iterando com um for, e as colunas(features) por índices.
@@ -171,7 +171,8 @@ input("Aperte Enter para continuar...")
 male, female = count_gender(data_list)
 print("\nTAREFA 8: Por que a condição a seguir é Falsa?")
 print("male + female == len(data_list):", male + female == len(data_list))
-answer = "Escreva sua resposta aqui."
+answer = """Devido aos usuários do tipo Customer não possuírem o registro gênero informado, apenas o de tipo Subscriber. Provavelmente para usuários que fazem a subscription do serviço,
+informar o gênero se faz obrigatório no cadastro e para clientes esporádicos não."""
 print("resposta:", answer)
 
 # ------------ NÃO MUDE NENHUM CÓDIGO AQUI ------------
