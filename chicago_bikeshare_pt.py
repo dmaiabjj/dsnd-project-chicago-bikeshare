@@ -354,7 +354,7 @@ if answer == "yes":
 
 # TAREFA 12 - Quem tem mais horas de viagens? Homens ou Mulheres (Extra)
 input("\nAperte Enter para continuar...")
-print("\nTAREFA 12: Imprimindo total das viagens de homens e mulheres")
+print("\nTAREFA EXTRA 12: Imprimindo total das viagens de homens e mulheres")
 
 def feature_sum(tuple_features,data_list):
     #      """
@@ -378,11 +378,14 @@ def feature_sum(tuple_features,data_list):
 
 print(feature_sum([("Male",-2,-6),("Female",-2,-6)],data_list))
 
-
-
-# TAREFA 13 - Ponto de partida mais popular (Extra)
+# TAREFA 13 - Quem tem mais horas de viagens? Customer ou Subscriber (Extra)
 input("\nAperte Enter para continuar...")
-print("\nTAREFA 13: Imprimindo os 5 pontos iniciais mais populares")
+print("\nTAREFA EXTRA 13: Imprimindo total das viagens de Customer e Subscriber")
+print(feature_sum([("Customer",-3,-6),("Subscriber",-3,-6)],data_list))
+
+# TAREFA 14 - Ponto de partida mais popular (Extra)
+input("\nAperte Enter para continuar...")
+print("\nTAREFA EXTRA 14: Imprimindo os 5 pontos iniciais mais populares")
 column_list     = column_to_list(data_list, 3)
 types, counts   = count_items(column_list)
 zip_list        = list(zip(types,counts))
@@ -390,9 +393,9 @@ zip_list        = sorted(zip_list,key = lambda item: item[1],reverse =True)
 print(zip_list[:5])
 
 
-# TAREFA 14 - Ponto de chegada mais popular (Extra)
+# TAREFA 15 - Ponto de chegada mais popular (Extra)
 input("\nAperte Enter para continuar...")
-print("\nTAREFA 14: Imprimindo os 5 pontos finais mais populares")
+print("\nTAREFA EXTRA 15: Imprimindo os 5 pontos finais mais populares")
 column_list = column_to_list(data_list, 4)
 types, counts = count_items(column_list)
 zip_list        = list(zip(types,counts))
