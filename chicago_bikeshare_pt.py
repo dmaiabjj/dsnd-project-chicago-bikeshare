@@ -100,7 +100,6 @@ input("\nAperte Enter para continuar...")
 # Isso deveria retornar uma lista com [count_male, count_female] (exemplo: [10, 15] significa 10 Masculinos, 15 Femininos)
 
 
-# TODO : COLOCAR COMENTÁRIO
 def feature_count(features,data_list):
     #      """
     #      Função que compara 2 elementos de uma linha do data list
@@ -350,3 +349,55 @@ if answer == "yes":
     assert len(types) == 3, "TAREFA 11: Há 3 tipos de gênero!"
     assert sum(counts) == 1551505, "TAREFA 11: Resultado de retorno incorreto!"
     # -----------------------------------------------------
+
+
+
+# TAREFA 12 - Quem tem mais horas de viagens? Homens ou Mulheres (Extra)
+input("\nAperte Enter para continuar...")
+print("\nTAREFA 12: Imprimindo total das viagens de homens e mulheres")
+
+def feature_sum(tuple_features,data_list):
+    #      """
+    #      Função que utiliza uma coluna como agrupamento e soma os valores da coluna referente
+    #      Argumentos:
+    #          tuple_features:  Lista de tuplas que contém 3 elementos: 
+    #                               1 - Valor de agrupamento
+    #                               2 - Index da coluna na qual o valor de agrupamento se encontra
+    #                               3 - Index da coluna na qual o valor referente ao valor de agrupamento está
+    #          data_list: É uma lista contendo todos os dados da amostra
+    #      Retorna:
+    #          Retorna um dictionary que possue como Key o valor de agrupamento e como Value o total dos valores somados 
+    #          Ex : {"Male": 1000,"Female": 2500}
+    #      """
+    features_counted = {}
+    for key,key_index,value_index in tuple_features:
+        features_counted[key] = sum([int(row[value_index]) for row in filter(lambda row: row[key_index] == key,data_list)])
+    return features_counted
+
+
+
+print(feature_sum([("Male",-2,-6),("Female",-2,-6)],data_list))
+
+
+
+# TAREFA 13 - Ponto de partida mais popular (Extra)
+input("\nAperte Enter para continuar...")
+print("\nTAREFA 13: Imprimindo os 5 pontos iniciais mais populares")
+column_list     = column_to_list(data_list, 3)
+types, counts   = count_items(column_list)
+zip_list        = list(zip(types,counts))
+zip_list        = sorted(zip_list,key = lambda item: item[1],reverse =True)
+print(zip_list[:5])
+
+
+# TAREFA 14 - Ponto de chegada mais popular (Extra)
+input("\nAperte Enter para continuar...")
+print("\nTAREFA 14: Imprimindo os 5 pontos finais mais populares")
+column_list = column_to_list(data_list, 4)
+types, counts = count_items(column_list)
+zip_list        = list(zip(types,counts))
+zip_list        = sorted(zip_list,key = lambda item: item[1],reverse =True)
+print(zip_list[:5])
+
+
+
